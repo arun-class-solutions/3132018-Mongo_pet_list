@@ -15,4 +15,15 @@ module.exports = (req, res) => {
   }
 
   // Call this method when the query is complete: res.redirect("/");
+
+  MongoClient.connect(mongoUrl, (err, db) => {
+
+    db
+    .collection("owners")
+    .insert(newOwner, (err, newOwner) => {
+      db.close();
+      res.redirect("/");
+    });
+
+  });
 }
