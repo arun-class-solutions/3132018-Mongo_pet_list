@@ -12,4 +12,16 @@ module.exports = (req, res) => {
   // res.render("edit_owner", {
   //   owner: ownerObject
   // });
+
+  MongoClient.connect(mongoUrl, (err, db) => {
+
+    db.collection("owners").findOne({
+      _id: ownerId
+    }, (err, ownerObject) => {
+      res.render("edit_owner", {
+        owner: ownerObject
+      });
+    });
+
+  });
 }
