@@ -10,4 +10,17 @@ module.exports = (req, res) => {
   // Call the method below after the query is complete:
 
   // res.sendStatus(200);
+
+  MongoClient.connect(mongoUrl, (err, db) => {
+
+    db
+    .collection("pets")
+    .remove({
+      _id: petId
+    }, (err) => {
+      db.close();
+      res.sendStatus(200);
+    });
+
+  });
 }
