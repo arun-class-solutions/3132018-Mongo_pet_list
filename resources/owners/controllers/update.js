@@ -19,4 +19,19 @@ module.exports = (req, res) => {
   // Call the method below after the query is complete:
 
   // res.redirect("/");
+
+  MongoClient.connect(mongoUrl, (err, db) => {
+
+    db
+    .collection("owners")
+    .update({
+      _id: ownerId
+    }, {
+      $set: editedOwner
+    }, (err, updatedOwner) => {
+      db.close();
+      res.redirect("/");
+    });
+
+  });
 }
