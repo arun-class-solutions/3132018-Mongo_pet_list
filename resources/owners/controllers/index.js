@@ -18,7 +18,17 @@ module.exports = (req, res) => {
 
     db
     .collection("owners")
-    .find({})
+    // .find({})
+    .aggregate([
+      {
+        $lookup: {
+          from: "pets",
+          localField: "_id",
+          foreignField: "ownerId",
+          as: "pets"
+        }
+      }
+    ])
     .toArray((err, ownersArray) => {
       res.render("index", {
         owners: ownersArray
