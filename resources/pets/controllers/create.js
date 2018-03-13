@@ -20,4 +20,15 @@ module.exports = (req, res) => {
   // Call the method below after the query is complete:
 
   // res.redirect("/");
+
+  MongoClient.connect(mongoUrl, (err, db) => {
+
+    db
+    .collection("pets")
+    .insert(newPet, (err, insertedPet) => {
+      db.close();
+      res.redirect("/");
+    });
+
+  });
 }
