@@ -21,6 +21,8 @@ module.exports = (req, res) => {
     .findOne({
       _id: petId
     }, (err, petObject) => {
+      db.close();
+      
       res.render("edit_pet", {
         pet: petObject
       });
